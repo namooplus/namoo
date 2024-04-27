@@ -50,7 +50,7 @@ const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
 
     const transitionTimer = setTimeout(() => {
       hide(false);
-    }, 700);
+    }, 500);
 
     return () => clearTimeout(transitionTimer);
   }, [postSelected]);

@@ -53,7 +53,7 @@ const PostModal = ({
 
     const transitionTimer = setTimeout(() => {
       setOpen(false);
-    }, 700);
+    }, 500);
 
     return () => clearTimeout(transitionTimer);
   }, [postId]);
