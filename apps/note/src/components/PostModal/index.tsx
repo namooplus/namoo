@@ -3,6 +3,7 @@
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import { PostSelectionCache } from "@/utils/cache";
 import styles from "./index.module.css";
+import { useParams } from "next/navigation";
 
 const popupStyle: CSSProperties = {
   top: "50px",
@@ -16,35 +17,57 @@ const PostModal = ({
 }: Readonly<{
   children: ReactNode;
 }>) => {
-  const postSelection = useRef(PostSelectionCache.get());
+  const postSelection = PostSelectionCache.get();
 
-  const [style, setStyle] = useState<CSSProperties>(
-    postSelection.current?.entryPosition ?? popupStyle
-  );
-  const [loaded, setLoaded] = useState(false);
+  const { postId } = useParams();
+  const [style, setStyle] = useState<CSSProperties>();
+  const [open, setOpen] = useState(false);
+
+  /**
+   * Opening transition
+   */
 
   useEffect(() => {
+    if (!postId) return;
+
+    setStyle(postSelection?.entryPosition ?? popupStyle);
+    setOpen(true);
+  }, [postId]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    setStyle(popupStyle);
+  }, [open]);
+
+  /**
+   * Closing transition
+   */
+  useEffect(() => {
+    if (postId) return;
+
+    setStyle(postSelection?.entryPosition);
+
     const transitionTimer = setTimeout(() => {
-      setStyle(popupStyle);
-    }, 0);
+      setOpen(false);
+    }, 700);
 
-    const loadTimer = setTimeout(() => {
-      setLoaded(true);
-    }, 1000);
+    return () => clearTimeout(transitionTimer);
+  }, [postId]);
 
-    () => {
-      clearTimeout(transitionTimer);
-      clearTimeout(loadTimer);
-    };
-  }, []);
+  if (!open) {
+    return null;
+  }
 
   return (
-    <div className={styles.wrapper} style={style}>
-      <div className={styles.title}>
-        <p>{postSelection.current?.title ?? "..."}</p>
-        <p>{postSelection.current?.date ?? "..."}</p>
+    <div className={styles.wrapper}>
+      <div className={styles.modal} style={style}>
+        <div className={styles.title}>
+          <p>{postSelection?.title ?? "..."}</p>
+          <p>{postSelection?.date ?? "..."}</p>
+        </div>
+        {children}
       </div>
-      {loaded && children}
     </div>
   );
 };

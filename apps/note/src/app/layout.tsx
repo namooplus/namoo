@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import PostList from "@/components/PostList";
 import Sidebar from "@/components/Sidebar";
-import PostOverlay from "@/components/PostOverlay";
+import PostModal from "@/components/PostModal";
 import "./globals.css";
 import styles from "./layout.module.css";
 
@@ -25,7 +25,7 @@ const RootLayout = ({
           <Sidebar />
           <PostList />
         </div>
-        <PostOverlay>{children}</PostOverlay>
+        <PostModal>{children}</PostModal>
       </body>
     </html>
   );

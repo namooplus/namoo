@@ -1,4 +1,18 @@
 .wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  backdrop-filter: blur(3px);
+}
+
+.modal {
   position: absolute;
 
   border: 1px solid #cccccc;

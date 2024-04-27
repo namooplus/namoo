@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { PostSummary } from "@/interfaces/post";
 import { PostSelectionCache } from "@/utils/cache";
@@ -10,6 +10,9 @@ import styles from "./index.module.css";
 const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
   const { push } = useRouter();
   const { postId } = useParams();
+
+  const postSelected = Number(postId) === id;
+  const [hidden, hide] = useState(postSelected);
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -30,12 +33,31 @@ const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
     push(`/posts/${id}`);
   };
 
+  /**
+   * Opening transition
+   */
+  useEffect(() => {
+    if (!postSelected) return;
+
+    hide(true);
+  }, [postSelected]);
+
+  /**
+   * Closing transition
+   */
+  useEffect(() => {
+    if (postSelected) return;
+
+    const transitionTimer = setTimeout(() => {
+      hide(false);
+    }, 700);
+
+    return () => clearTimeout(transitionTimer);
+  }, [postSelected]);
+
   return (
     <div
-      className={mergeStyle(
-        styles.wrapper,
-        Number(postId) === id && styles.hidden
-      )}
+      className={mergeStyle(styles.wrapper, hidden && styles.hidden)}
       onClick={handleClick}
     >
       <p>{title}</p>
