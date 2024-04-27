@@ -6,6 +6,6 @@
   "author": "namoo.developer@gmail.com",
   "license": "ISC",
   "scripts": {
-    "namoo-note": "pnpm -F @namoo/namoo-note"
+    "note": "pnpm --filter @namoo/note"
   }
 }
