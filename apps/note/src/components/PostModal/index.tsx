@@ -20,7 +20,8 @@ const PostModal = ({
   const postSelection = PostSelectionCache.get();
 
   const { postId } = useParams();
-  const [style, setStyle] = useState<CSSProperties>();
+  const [overlayStyle, setOverlayStyle] = useState<CSSProperties>();
+  const [modalStyle, setModalStyle] = useState<CSSProperties>();
   const [open, setOpen] = useState(false);
 
   /**
@@ -30,14 +31,15 @@ const PostModal = ({
   useEffect(() => {
     if (!postId) return;
 
-    setStyle(postSelection?.entryPosition ?? popupStyle);
+    setModalStyle(postSelection?.entryPosition ?? popupStyle);
     setOpen(true);
   }, [postId]);
 
   useEffect(() => {
     if (!open) return;
 
-    setStyle(popupStyle);
+    setOverlayStyle({ opacity: 1 });
+    setModalStyle(popupStyle);
   }, [open]);
 
   /**
@@ -46,7 +48,8 @@ const PostModal = ({
   useEffect(() => {
     if (postId) return;
 
-    setStyle(postSelection?.entryPosition);
+    setOverlayStyle({ opacity: 0 });
+    setModalStyle(postSelection?.entryPosition);
 
     const transitionTimer = setTimeout(() => {
       setOpen(false);
@@ -61,7 +64,8 @@ const PostModal = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.modal} style={style}>
+      <div className={styles.overlay} style={overlayStyle} />
+      <div className={styles.modal} style={modalStyle}>
         <div className={styles.title}>
           <p>{postSelection?.title ?? "..."}</p>
           <p>{postSelection?.date ?? "..."}</p>

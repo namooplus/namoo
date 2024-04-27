@@ -8,8 +8,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
+.overlay {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: #00000030;
   backdrop-filter: blur(3px);
+
+  transition: opacity 0.7s;
 }
 
 .modal {
@@ -18,7 +30,7 @@
   border: 1px solid #cccccc;
   border-radius: 10px;
   background-color: white;
-  transition: all ease 0.7s;
+  transition: inset ease 0.7s;
 
   overflow-x: hidden;
   overflow-y: scroll;
