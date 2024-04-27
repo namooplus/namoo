@@ -1,5 +1,5 @@
-type RootPageProps = Readonly<{}>;
-
-export default function RootPage({}: RootPageProps) {
+const RootPage = ({}: Readonly<{}>) => {
   return <></>;
-}
+};
+
+export default RootPage;

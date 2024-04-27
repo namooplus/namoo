@@ -1,10 +1,10 @@
 import styles from "./page.module.css";
 
-type PostDetailProps = Readonly<{
+const PostDetailPage = ({
+  params,
+}: Readonly<{
   params: { postId: string };
-}>;
-
-export default function PostDetailPage({ params }: PostDetailProps) {
+}>) => {
   const postId = Number(params.postId);
 
   return (
@@ -12,4 +12,6 @@ export default function PostDetailPage({ params }: PostDetailProps) {
       <h1>포스트 {postId}</h1>
     </div>
   );
-}
+};
+
+export default PostDetailPage;

@@ -1,6 +1,10 @@
 import { Position } from "@/interfaces/layout";
 import { PostSummary } from "@/interfaces/post";
 
+/**
+ * Post Selection
+ */
+
 export type PostSelection = PostSummary & {
   entryPosition: Position;
 };

@@ -1,8 +1,8 @@
 "use client";
 
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
+import { PostSelectionCache } from "@/utils/cache";
 import styles from "./index.module.css";
-import { PostSelectionCache } from "@/utils/post";
 
 const popupStyle: CSSProperties = {
   top: "50px",
@@ -11,11 +11,11 @@ const popupStyle: CSSProperties = {
   right: "50px",
 };
 
-type PostModalProps = Readonly<{
+const PostModal = ({
+  children,
+}: Readonly<{
   children: ReactNode;
-}>;
-
-export default function PostModal({ children }: PostModalProps) {
+}>) => {
   const postSelection = useRef(PostSelectionCache.get());
 
   const [style, setStyle] = useState<CSSProperties>(
@@ -47,4 +47,6 @@ export default function PostModal({ children }: PostModalProps) {
       {loaded && children}
     </div>
   );
-}
+};
+
+export default PostModal;

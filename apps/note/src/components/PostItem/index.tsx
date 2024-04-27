@@ -1,15 +1,13 @@
 "use client";
 
 import { MouseEvent } from "react";
-import styles from "./index.module.css";
 import { useParams, useRouter } from "next/navigation";
-import { PostSelectionCache } from "@/utils/post";
 import { PostSummary } from "@/interfaces/post";
+import { PostSelectionCache } from "@/utils/cache";
 import { mergeStyle } from "@/utils/style";
+import styles from "./index.module.css";
 
-type PostItemProps = Readonly<PostSummary>;
-
-export default function PostItem({ id, title, date }: PostItemProps) {
+const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
   const { push } = useRouter();
   const { postId } = useParams();
 
@@ -44,4 +42,6 @@ export default function PostItem({ id, title, date }: PostItemProps) {
       <p>{date}</p>
     </div>
   );
-}
+};
+
+export default PostItem;

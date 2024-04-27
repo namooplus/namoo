@@ -2,9 +2,7 @@ import PostItem from "@/components/PostItem";
 import { posts } from "@/data/post";
 import styles from "./index.module.css";
 
-type PostListProps = Readonly<{}>;
-
-export default function PostList({}: PostListProps) {
+const PostList = ({}: Readonly<{}>) => {
   return (
     <div className={styles.wrapper}>
       {posts.map((post) => (
@@ -12,4 +10,6 @@ export default function PostList({}: PostListProps) {
       ))}
     </div>
   );
-}
+};
+
+export default PostList;

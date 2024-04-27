@@ -1,15 +1,15 @@
 "use client";
 
 import { ReactNode } from "react";
-import styles from "./index.module.css";
 import { useParams } from "next/navigation";
 import PostModal from "@/components/PostModal";
+import styles from "./index.module.css";
 
-type PostOverlayProps = Readonly<{
+const PostOverlay = ({
+  children,
+}: Readonly<{
   children: ReactNode;
-}>;
-
-export default function PostOverlay({ children }: PostOverlayProps) {
+}>) => {
   const { postId } = useParams();
 
   if (!postId) {
@@ -21,4 +21,6 @@ export default function PostOverlay({ children }: PostOverlayProps) {
       <PostModal>{children}</PostModal>
     </div>
   );
-}
+};
+
+export default PostOverlay;

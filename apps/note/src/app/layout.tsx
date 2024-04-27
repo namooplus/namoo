@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import PostList from "@/components/PostList";
-import "./globals.css";
-import styles from "./layout.module.css";
 import Sidebar from "@/components/Sidebar";
 import PostOverlay from "@/components/PostOverlay";
+import "./globals.css";
+import styles from "./layout.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   description: "나무의 노트",
 };
 
-type RootLayoutProps = Readonly<{
+const RootLayout = ({
+  children,
+}: Readonly<{
   children: React.ReactNode;
-}>;
-
-export default function RootLayout({ children }: RootLayoutProps) {
+}>) => {
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -29,4 +29,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
