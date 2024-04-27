@@ -1,0 +1,6 @@
+.wrapper {
+  position: fixed;
+
+  background-color: orange;
+  transition: inset ease 0.3s;
+}
