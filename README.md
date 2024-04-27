@@ -2,4 +2,4 @@
 
 ## Projects
 
-- namoo-note
+- note
