@@ -1,60 +1,50 @@
 "use client";
 
-import { CSSProperties, ReactNode, useEffect, useState } from "react";
+import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import styles from "./index.module.css";
-import { ModalPosition } from "@/interfaces/modal";
+import { PostSelectionCache } from "@/utils/post";
 
-const progressStyle: CSSProperties = {
-  top: "50%",
-  left: "50%",
-  width: "100px",
-  height: "100px",
-  transform: "translate(-50%, -50%)",
-};
-
-const loadStyle: CSSProperties = {
+const popupStyle: CSSProperties = {
   top: "50px",
   left: "50px",
-  width: "calc(100% - 100px)",
-  height: "calc(100% - 50px)",
-  transform: "none",
-  borderBottomLeftRadius: 0,
-  borderBottomRightRadius: 0,
+  bottom: "50px",
+  right: "50px",
 };
 
 type PostModalProps = Readonly<{
-  previousPosition?: ModalPosition;
   children: ReactNode;
 }>;
 
-export default function PostModal({
-  previousPosition,
-  children,
-}: PostModalProps) {
+export default function PostModal({ children }: PostModalProps) {
+  const postSelection = useRef(PostSelectionCache.get());
+
   const [style, setStyle] = useState<CSSProperties>(
-    previousPosition ?? progressStyle
+    postSelection.current?.entryPosition ?? popupStyle
   );
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const progressTimer = setTimeout(() => {
-      setStyle(progressStyle);
+    const transitionTimer = setTimeout(() => {
+      setStyle(popupStyle);
     }, 0);
 
     const loadTimer = setTimeout(() => {
-      setStyle(loadStyle);
       setLoaded(true);
     }, 1000);
 
     () => {
-      clearTimeout(progressTimer);
+      clearTimeout(transitionTimer);
       clearTimeout(loadTimer);
     };
   }, []);
 
   return (
     <div className={styles.wrapper} style={style}>
-      {loaded ? children : "Loading..."}
+      <div className={styles.title}>
+        <p>{postSelection.current?.title ?? "..."}</p>
+        <p>{postSelection.current?.date ?? "..."}</p>
+      </div>
+      {loaded && children}
     </div>
   );
 }

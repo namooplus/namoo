@@ -1,10 +1,16 @@
 .wrapper {
-  position: fixed;
+  position: absolute;
 
+  border: 1px solid #cccccc;
   border-radius: 10px;
-  background-color: orange;
+  background-color: white;
   transition: all ease 0.7s;
 
   overflow-x: hidden;
   overflow-y: scroll;
+}
+
+.title {
+  padding: 20px;
+  border-bottom: 1px solid #cccccc;
 }

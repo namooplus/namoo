@@ -4,6 +4,7 @@ import PostList from "@/components/PostList";
 import "./globals.css";
 import styles from "./layout.module.css";
 import Sidebar from "@/components/Sidebar";
+import PostOverlay from "@/components/PostOverlay";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={inter.className}>
         <div className={styles.wrapper}>
           <Sidebar />
-          <PostList>{children}</PostList>
+          <PostList />
         </div>
+        <PostOverlay>{children}</PostOverlay>
       </body>
     </html>
   );

@@ -4,3 +4,5 @@ export interface Post {
   date: string;
   content: string;
 }
+
+export type PostSummary = Omit<Post, "content">;
