@@ -1,0 +1,42 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: #00000030;
+  backdrop-filter: blur(3px);
+
+  transition: opacity 0.5s;
+}
+
+.modal {
+  position: absolute;
+
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  background-color: white;
+  transition: inset ease 0.5s;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.title {
+  padding: 20px;
+  border-bottom: 1px solid #cccccc;
+}
