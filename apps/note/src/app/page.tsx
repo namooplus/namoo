@@ -1,5 +1,5 @@
-import styles from "./page.module.css";
+const RootPage = ({}: Readonly<{}>) => {
+  return <></>;
+};
 
-export default function Home() {
-  return <main className={styles.main}>나무의 노트</main>;
-}
+export default RootPage;
