@@ -1,6 +1,6 @@
 export interface ModalPosition {
-  top: number;
-  left: number;
-  bottom: number;
-  right: number;
+  top: string;
+  left: string;
+  width: string;
+  height: string;
 }

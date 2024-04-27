@@ -1,41 +1,31 @@
-import { MouseEvent, MouseEventHandler } from "react";
+import { MouseEvent } from "react";
 import styles from "./index.module.css";
 import { useRouter } from "next/navigation";
 import { ModalPosition } from "@/interfaces/modal";
 
-export type Memory = {
-  title: string;
-  content: string;
-  position: ModalPosition;
-};
-
 type PostItemProps = Readonly<{
   id: number;
   title: string;
-  content: string;
-  setMemory: (memory: Memory) => void;
+  date: string;
+  setPreviousPosition: (memory: ModalPosition) => void;
 }>;
 
 export default function PostItem({
   id,
   title,
-  content,
-  setMemory,
+  date,
+  setPreviousPosition,
 }: PostItemProps) {
   const { push } = useRouter();
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
 
-    setMemory({
-      title,
-      content,
-      position: {
-        top: rect.top,
-        left: rect.left,
-        right: rect.right,
-        bottom: rect.bottom,
-      },
+    setPreviousPosition({
+      top: `${rect.top}px`,
+      left: `${rect.left}px`,
+      width: `${rect.width}px`,
+      height: `${rect.height}px`,
     });
     push(`/posts/${id}`);
   };
@@ -43,7 +33,7 @@ export default function PostItem({
   return (
     <div className={styles.wrapper} onClick={handleClick}>
       <p>{title}</p>
-      <p>{content}</p>
+      <p>{date}</p>
     </div>
   );
 }

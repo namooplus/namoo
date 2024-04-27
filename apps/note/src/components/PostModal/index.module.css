@@ -1,6 +1,10 @@
 .wrapper {
   position: fixed;
 
+  border-radius: 10px;
   background-color: orange;
-  transition: inset ease 0.3s;
+  transition: all ease 0.7s;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
