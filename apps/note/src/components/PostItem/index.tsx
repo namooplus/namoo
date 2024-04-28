@@ -47,11 +47,16 @@ const PostItem = ({ id, ...post }: Readonly<PostSummary>) => {
   useEffect(() => {
     if (postSelected) return;
 
-    const transitionTimer = setTimeout(() => {
-      hide(false);
-    }, 500);
+    const postSelection = PostSelectionCache.get();
 
-    return () => clearTimeout(transitionTimer);
+    if (postSelection) {
+      setTimeout(() => {
+        hide(false);
+        PostSelectionCache.clear();
+      }, 500);
+    } else {
+      hide(false);
+    }
   }, [postSelected]);
 
   return (
