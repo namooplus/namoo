@@ -8,8 +8,10 @@ import { useParams } from "next/navigation";
 const popupStyle: CSSProperties = {
   top: "50px",
   left: "50px",
-  bottom: "50px",
+  bottom: "0px",
   right: "50px",
+  borderBottomLeftRadius: 0,
+  borderBottomRightRadius: 0,
 };
 
 const PostModal = ({
