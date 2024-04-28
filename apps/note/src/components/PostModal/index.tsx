@@ -4,15 +4,7 @@ import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import { PostSelectionCache } from "@/utils/cache";
 import styles from "./index.module.css";
 import { useParams } from "next/navigation";
-
-const popupStyle: CSSProperties = {
-  top: "50px",
-  left: "50px",
-  bottom: "0px",
-  right: "50px",
-  borderBottomLeftRadius: 0,
-  borderBottomRightRadius: 0,
-};
+import { generatePostModalStyle } from "@/utils/style";
 
 const PostModal = ({
   children,
@@ -22,8 +14,7 @@ const PostModal = ({
   const postSelection = PostSelectionCache.get();
 
   const { postId } = useParams();
-  const [overlayStyle, setOverlayStyle] = useState<CSSProperties>();
-  const [modalStyle, setModalStyle] = useState<CSSProperties>();
+  const [style, setStyle] = useState<Record<string, CSSProperties>>({});
   const [open, setOpen] = useState(false);
 
   /**
@@ -33,15 +24,19 @@ const PostModal = ({
   useEffect(() => {
     if (!postId) return;
 
-    setModalStyle(postSelection?.entryPosition ?? popupStyle);
+    setStyle(
+      generatePostModalStyle({
+        state: "closed",
+        entryPosition: postSelection?.entryPosition,
+      })
+    );
     setOpen(true);
   }, [postId]);
 
   useEffect(() => {
     if (!open) return;
 
-    setOverlayStyle({ opacity: 1 });
-    setModalStyle(popupStyle);
+    setStyle(generatePostModalStyle({ state: "open" }));
   }, [open]);
 
   /**
@@ -50,8 +45,12 @@ const PostModal = ({
   useEffect(() => {
     if (postId) return;
 
-    setOverlayStyle({ opacity: 0 });
-    setModalStyle(postSelection?.entryPosition);
+    setStyle(
+      generatePostModalStyle({
+        state: "closed",
+        entryPosition: postSelection?.entryPosition,
+      })
+    );
 
     const transitionTimer = setTimeout(() => {
       setOpen(false);
@@ -66,12 +65,27 @@ const PostModal = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.overlay} style={overlayStyle} />
-      <div className={styles.modal} style={modalStyle}>
-        <div className={styles.title}>
-          <p>{postSelection?.title ?? "..."}</p>
-          <p>{postSelection?.date ?? "..."}</p>
+      <div className={styles.overlay} style={style.overlay} />
+      <div className={styles.floating} style={style.floating}>
+        {/* Header */}
+        <div className={styles.header}>
+          <p className={styles.title}>{postSelection?.title ?? "..."}</p>
+          <div className={styles.metadata}>
+            <span>{postSelection?.date ?? "..."}</span>
+            <span>·</span>
+            <div className={styles.tags}>
+              <span className={styles.category}>
+                {postSelection?.category ?? "..."}
+              </span>
+              {postSelection?.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
+        {/* Content */}
         {children}
       </div>
     </div>
