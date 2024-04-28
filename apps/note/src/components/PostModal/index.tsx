@@ -86,10 +86,11 @@ const PostModal = ({
               {postSelection?.date ?? "..."}
             </span>
             <span>·</span>
+            <span className={styles.category} style={style.category}>
+              {postSelection?.category ?? "..."}
+            </span>
+            <span>·</span>
             <div className={styles.tags}>
-              <span className={styles.category} style={style.category}>
-                {postSelection?.category ?? "..."}
-              </span>
               {postSelection?.tags.map((tag) => (
                 <span key={tag} className={styles.tag} style={style.tag}>
                   {tag}

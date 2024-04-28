@@ -46,7 +46,7 @@ export const generatePostModalStyle = ({
         fontSize: "12px",
       },
       category: {
-        fontSize: "9px",
+        fontSize: "12px",
       },
       tag: {
         fontSize: "9px",
@@ -87,7 +87,7 @@ export const generatePostModalStyle = ({
       fontSize: "15px",
     },
     category: {
-      fontSize: "12px",
+      fontSize: "15px",
     },
     tag: {
       fontSize: "12px",

@@ -62,19 +62,14 @@
   transition: font-size ease 0.5s;
 }
 
+.category {
+  transition: font-size ease 0.5s;
+}
+
 .tags {
   display: flex;
   align-items: center;
   gap: 2px;
-}
-
-.category {
-  color: #ffffff;
-  background-color: #0f8e95;
-  padding: 2px 5px;
-  border-radius: 5px;
-
-  transition: font-size ease 0.5s;
 }
 
 .tag {

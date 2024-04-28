@@ -61,10 +61,11 @@ const PostItem = ({ id, ...post }: Readonly<PostSummary>) => {
     >
       <p className={styles.title}>{post.title}</p>
       <div className={styles.metadata}>
-        <span>{post.date}</span>
+        <span className={styles.date}>{post.date}</span>
+        <span>·</span>
+        <span className={styles.category}>{post.category}</span>
         <span>·</span>
         <div className={styles.tags}>
-          <span className={styles.category}>{post.category}</span>
           {post.tags.map((tag) => (
             <span key={tag} className={styles.tag}>
               {tag}
