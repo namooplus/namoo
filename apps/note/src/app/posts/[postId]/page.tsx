@@ -1,4 +1,6 @@
+import { posts } from "@/data/post";
 import styles from "./page.module.css";
+import { notFound } from "next/navigation";
 
 const PostDetailPage = ({
   params,
@@ -7,11 +9,13 @@ const PostDetailPage = ({
 }>) => {
   const postId = Number(params.postId);
 
-  return (
-    <div className={styles.wrapper}>
-      <h1>포스트 {postId}</h1>
-    </div>
-  );
+  const post = posts.find((post) => post.id === postId);
+
+  if (!post) {
+    notFound();
+  }
+
+  return <div className={styles.wrapper}>{post.content}</div>;
 };
 
 export default PostDetailPage;

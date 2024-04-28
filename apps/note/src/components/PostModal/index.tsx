@@ -1,46 +1,43 @@
 "use client";
 
-import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect } from "react";
+import { IoMdClose } from "react-icons/io";
+import { useParams, useRouter } from "next/navigation";
+import { createPostModalOriginStyle, postModalStyle } from "@/data/modal";
+import useOriginatedModal from "@/hooks/useOriginatedModal";
 import { PostSelectionCache } from "@/utils/cache";
 import styles from "./index.module.css";
-import { useParams } from "next/navigation";
-
-const popupStyle: CSSProperties = {
-  top: "50px",
-  left: "50px",
-  bottom: "50px",
-  right: "50px",
-};
 
 const PostModal = ({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) => {
+  const { back } = useRouter();
+  const { postId } = useParams();
+  const { open, close, style, isOpen } = useOriginatedModal({
+    modalStyle: postModalStyle,
+    duration: 500,
+  });
+
   const postSelection = PostSelectionCache.get();
 
-  const { postId } = useParams();
-  const [overlayStyle, setOverlayStyle] = useState<CSSProperties>();
-  const [modalStyle, setModalStyle] = useState<CSSProperties>();
-  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    back();
+  };
 
   /**
    * Opening transition
    */
-
   useEffect(() => {
     if (!postId) return;
 
-    setModalStyle(postSelection?.entryPosition ?? popupStyle);
-    setOpen(true);
+    const originPosition = postSelection?.entryPosition;
+    const originStyle =
+      originPosition && createPostModalOriginStyle(originPosition);
+
+    open(originStyle);
   }, [postId]);
-
-  useEffect(() => {
-    if (!open) return;
-
-    setOverlayStyle({ opacity: 1 });
-    setModalStyle(popupStyle);
-  }, [open]);
 
   /**
    * Closing transition
@@ -48,29 +45,58 @@ const PostModal = ({
   useEffect(() => {
     if (postId) return;
 
-    setOverlayStyle({ opacity: 0 });
-    setModalStyle(postSelection?.entryPosition);
+    const originPosition = postSelection?.entryPosition;
+    const originStyle =
+      originPosition && createPostModalOriginStyle(originPosition);
 
-    const transitionTimer = setTimeout(() => {
-      setOpen(false);
-    }, 500);
-
-    return () => clearTimeout(transitionTimer);
+    close(originStyle);
   }, [postId]);
 
-  if (!open) {
+  if (!isOpen) {
     return null;
   }
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.overlay} style={overlayStyle} />
-      <div className={styles.modal} style={modalStyle}>
-        <div className={styles.title}>
-          <p>{postSelection?.title ?? "..."}</p>
-          <p>{postSelection?.date ?? "..."}</p>
+      <div
+        className={styles.overlay}
+        style={style.overlay}
+        onClick={handleClose}
+      />
+      <div className={styles.floating} style={style.floating}>
+        {/* Header */}
+        <div className={styles.header} style={style.header}>
+          <p className={styles.title} style={style.title}>
+            {postSelection?.title ?? "..."}
+          </p>
+          <div className={styles.metadata} style={style.metadata}>
+            <span className={styles.date} style={style.date}>
+              {postSelection?.date ?? "..."}
+            </span>
+            <span>·</span>
+            <span className={styles.category} style={style.category}>
+              {postSelection?.category ?? "..."}
+            </span>
+            <span>·</span>
+            <div className={styles.tags}>
+              {postSelection?.tags.map((tag) => (
+                <span key={tag} className={styles.tag} style={style.tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
+        {/* Content */}
         {children}
+        {/* Close */}
+        <button
+          className={styles.close}
+          style={style.close}
+          onClick={handleClose}
+        >
+          <IoMdClose size={20} />
+        </button>
       </div>
     </div>
   );

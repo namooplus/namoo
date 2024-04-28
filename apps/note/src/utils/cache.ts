@@ -1,4 +1,4 @@
-import { Position } from "@/interfaces/layout";
+import { Position } from "@/interfaces/style";
 import { PostSummary } from "@/interfaces/post";
 
 /**

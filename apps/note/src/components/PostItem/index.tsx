@@ -7,7 +7,7 @@ import { PostSelectionCache } from "@/utils/cache";
 import { mergeStyle } from "@/utils/style";
 import styles from "./index.module.css";
 
-const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
+const PostItem = ({ id, ...post }: Readonly<PostSummary>) => {
   const { push } = useRouter();
   const { postId } = useParams();
 
@@ -19,8 +19,7 @@ const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
 
     PostSelectionCache.memorize({
       id,
-      title,
-      date,
+      ...post,
       entryPosition: {
         top: rect.top,
         left: rect.left,
@@ -48,11 +47,16 @@ const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
   useEffect(() => {
     if (postSelected) return;
 
-    const transitionTimer = setTimeout(() => {
-      hide(false);
-    }, 500);
+    const postSelection = PostSelectionCache.get();
 
-    return () => clearTimeout(transitionTimer);
+    if (postSelection) {
+      setTimeout(() => {
+        hide(false);
+        PostSelectionCache.clear();
+      }, 500);
+    } else {
+      hide(false);
+    }
   }, [postSelected]);
 
   return (
@@ -60,8 +64,20 @@ const PostItem = ({ id, title, date }: Readonly<PostSummary>) => {
       className={mergeStyle(styles.wrapper, hidden && styles.hidden)}
       onClick={handleClick}
     >
-      <p>{title}</p>
-      <p>{date}</p>
+      <p className={styles.title}>{post.title}</p>
+      <div className={styles.metadata}>
+        <span className={styles.date}>{post.date}</span>
+        <span>·</span>
+        <span className={styles.category}>{post.category}</span>
+        <span>·</span>
+        <div className={styles.tags}>
+          {post.tags.map((tag) => (
+            <span key={tag} className={styles.tag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
