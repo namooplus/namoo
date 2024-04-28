@@ -35,6 +35,24 @@ export const generatePostModalStyle = ({
       },
       title: {
         fontSize: "18px",
+        left: "0",
+        transform: "translateX(0)",
+      },
+      metadata: {
+        left: "0",
+        transform: "translateX(0)",
+      },
+      date: {
+        fontSize: "12px",
+      },
+      category: {
+        fontSize: "9px",
+      },
+      tag: {
+        fontSize: "9px",
+      },
+      close: {
+        opacity: 0,
       },
     };
   }
@@ -48,16 +66,34 @@ export const generatePostModalStyle = ({
       left: "50px",
       bottom: "0px",
       right: "50px",
-      borderRadius: "30px 30px 0 0",
+      borderRadius: "55px 55px 0 0",
       backgroundColor: "#f8f8f8",
       boxShadow: "0 0 10px #00000020",
     },
     header: {
       gap: "10px",
-      padding: "30px",
+      padding: "60px 30px",
     },
     title: {
       fontSize: "24px",
+      left: "50%",
+      transform: "translateX(-50%)",
+    },
+    metadata: {
+      left: "50%",
+      transform: "translateX(-50%)",
+    },
+    date: {
+      fontSize: "15px",
+    },
+    category: {
+      fontSize: "12px",
+    },
+    tag: {
+      fontSize: "12px",
+    },
+    close: {
+      opacity: 1,
     },
   };
 };
