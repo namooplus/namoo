@@ -29,6 +29,13 @@ export const generatePostModalStyle = ({
         borderRadius: "10px",
         backgroundColor: "#00000010",
       },
+      header: {
+        gap: "7px",
+        padding: "20px",
+      },
+      title: {
+        fontSize: "18px",
+      },
     };
   }
 
@@ -44,6 +51,13 @@ export const generatePostModalStyle = ({
       borderRadius: "30px 30px 0 0",
       backgroundColor: "#f8f8f8",
       boxShadow: "0 0 10px #00000020",
+    },
+    header: {
+      gap: "10px",
+      padding: "30px",
+    },
+    title: {
+      fontSize: "24px",
     },
   };
 };

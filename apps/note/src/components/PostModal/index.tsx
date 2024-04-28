@@ -68,8 +68,10 @@ const PostModal = ({
       <div className={styles.overlay} style={style.overlay} />
       <div className={styles.floating} style={style.floating}>
         {/* Header */}
-        <div className={styles.header}>
-          <p className={styles.title}>{postSelection?.title ?? "..."}</p>
+        <div className={styles.header} style={style.header}>
+          <p className={styles.title} style={style.title}>
+            {postSelection?.title ?? "..."}
+          </p>
           <div className={styles.metadata}>
             <span>{postSelection?.date ?? "..."}</span>
             <span>·</span>

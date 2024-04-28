@@ -36,13 +36,14 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  padding: 20px;
+
+  transition: all ease 0.5s;
 }
 
 .title {
-  font-size: 18px;
   color: #222222;
+
+  transition: font-size ease 0.5s;
 }
 
 .metadata {
