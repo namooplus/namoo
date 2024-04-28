@@ -5,9 +5,11 @@ import styles from "./index.module.css";
 const PostList = ({}: Readonly<{}>) => {
   return (
     <div className={styles.wrapper}>
-      {posts.map((post) => (
-        <PostItem key={post.id} {...post} />
-      ))}
+      <div className={styles.container}>
+        {posts.map((post) => (
+          <PostItem key={post.id} {...post} />
+        ))}
+      </div>
     </div>
   );
 };
