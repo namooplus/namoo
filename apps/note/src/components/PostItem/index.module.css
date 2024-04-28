@@ -3,10 +3,14 @@
   flex-direction: column;
   gap: 7px;
   padding: 20px;
-  border: 1px solid #cccccc;
   border-radius: 10px;
 
   cursor: pointer;
+  transition: background-color ease 0.3s;
+}
+
+.wrapper:hover {
+  background-color: #00000010;
 }
 
 .hidden {
