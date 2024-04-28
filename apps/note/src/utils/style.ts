@@ -63,9 +63,9 @@ export const generatePostModalStyle = ({
     },
     floating: {
       top: "50px",
-      left: "50px",
+      left: "max(calc((100% - 800px) / 2), 50px)",
       bottom: "0px",
-      right: "50px",
+      right: "max(calc((100% - 800px) / 2), 50px)",
       borderRadius: "55px 55px 0 0",
       backgroundColor: "#f8f8f8",
       boxShadow: "0 0 10px #00000020",
