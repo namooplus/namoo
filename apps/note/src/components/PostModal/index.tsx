@@ -1,22 +1,26 @@
 "use client";
 
-import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect } from "react";
+import { IoMdClose } from "react-icons/io";
+import { useParams, useRouter } from "next/navigation";
+import { createPostModalOriginStyle, postModalStyle } from "@/data/modal";
+import useOriginatedModal from "@/hooks/useOriginatedModal";
 import { PostSelectionCache } from "@/utils/cache";
 import styles from "./index.module.css";
-import { useParams, useRouter } from "next/navigation";
-import { generatePostModalStyle } from "@/utils/style";
 
 const PostModal = ({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) => {
-  const postSelection = PostSelectionCache.get();
-
   const { back } = useRouter();
   const { postId } = useParams();
-  const [style, setStyle] = useState<Record<string, CSSProperties>>({});
-  const [open, setOpen] = useState(false);
+  const { open, close, style, isOpen } = useOriginatedModal({
+    modalStyle: postModalStyle,
+    duration: 500,
+  });
+
+  const postSelection = PostSelectionCache.get();
 
   const handleClose = () => {
     back();
@@ -25,24 +29,15 @@ const PostModal = ({
   /**
    * Opening transition
    */
-
   useEffect(() => {
     if (!postId) return;
 
-    setStyle(
-      generatePostModalStyle({
-        state: "closed",
-        entryPosition: postSelection?.entryPosition,
-      })
-    );
-    setOpen(true);
+    const originPosition = postSelection?.entryPosition;
+    const originStyle =
+      originPosition && createPostModalOriginStyle(originPosition);
+
+    open(originStyle);
   }, [postId]);
-
-  useEffect(() => {
-    if (!open) return;
-
-    setStyle(generatePostModalStyle({ state: "open" }));
-  }, [open]);
 
   /**
    * Closing transition
@@ -50,21 +45,14 @@ const PostModal = ({
   useEffect(() => {
     if (postId) return;
 
-    setStyle(
-      generatePostModalStyle({
-        state: "closed",
-        entryPosition: postSelection?.entryPosition,
-      })
-    );
+    const originPosition = postSelection?.entryPosition;
+    const originStyle =
+      originPosition && createPostModalOriginStyle(originPosition);
 
-    const transitionTimer = setTimeout(() => {
-      setOpen(false);
-    }, 500);
-
-    return () => clearTimeout(transitionTimer);
+    close(originStyle);
   }, [postId]);
 
-  if (!open) {
+  if (!isOpen) {
     return null;
   }
 
@@ -107,7 +95,7 @@ const PostModal = ({
           style={style.close}
           onClick={handleClose}
         >
-          X
+          <IoMdClose size={20} />
         </button>
       </div>
     </div>
