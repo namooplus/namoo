@@ -5,3 +5,5 @@
 - note
 
 ## Libraries
+
+- eslint-config-namoo

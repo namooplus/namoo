@@ -21,6 +21,7 @@
     "eslint-config-namoo": "workspace:*",
     "prettier": "^3.3.2",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "vite-tsconfig-paths": "^4.3.2"
   }
 }
