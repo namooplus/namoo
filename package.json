@@ -1,0 +1,10 @@
+{
+  "name": "namoo",
+  "description": "",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.4.0",
+  "author": "namoo.developer@gmail.com",
+  "license": "ISC",
+  "scripts": {}
+}
