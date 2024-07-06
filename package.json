@@ -6,5 +6,7 @@
   "packageManager": "pnpm@9.4.0",
   "author": "namoo.developer@gmail.com",
   "license": "ISC",
-  "scripts": {}
+  "scripts": {
+    "note": "pnpm --filter @namoo/note"
+  }
 }
