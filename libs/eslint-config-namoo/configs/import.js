@@ -32,6 +32,12 @@ export default [
             ["internal"],
             ["index", "parent", "sibling"],
           ],
+          pathGroups: [
+            {
+              pattern: "@/**",
+              group: "internal",
+            },
+          ],
           alphabetize: {
             order: "asc",
             caseInsensitive: true,
