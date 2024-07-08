@@ -9,5 +9,12 @@
   "scripts": {
     "note": "pnpm --filter @namoo/note",
     "eslint-config-namoo": "pnpm --filter eslint-config-namoo"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowAny": [
+        "eslint"
+      ]
+    }
   }
 }
