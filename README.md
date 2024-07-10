@@ -2,6 +2,7 @@
 
 ## Applications
 
+- desk
 - note
 
 ## Libraries
