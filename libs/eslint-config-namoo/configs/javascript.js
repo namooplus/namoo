@@ -4,7 +4,7 @@ import jsLint from "@eslint/js";
 
 /**
  * This config includes:
- * - Enable recommended rules for Javascript.
+ * - Enable recommended Javascript rules.
  */
 
 /** @type {import("@typescript-eslint/utils").TSESLint.FlatConfig.ConfigArray} */

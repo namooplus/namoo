@@ -4,8 +4,9 @@ import { FlatCompat } from "@eslint/eslintrc";
 
 /**
  * This config includes:
+ * - Enable recommended rules from eslint-plugin-react, eslint-plugin-react-hooks, eslint-plugin-jsx-a11y
  * - Enable recommended Typescript rules
- * - Enable recommended rules from Next.js
+ * - Enable recommended rules by Next.js
  */
 
 const compat = new FlatCompat();
