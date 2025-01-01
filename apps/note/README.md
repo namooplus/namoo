@@ -1,1 +1,3 @@
 # note
+
+namoo's blog

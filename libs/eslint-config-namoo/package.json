@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-namoo",
-  "description": "ESLint configuration for workspace",
+  "description": "Shared ESLint configuration for namoo's workspace",
   "version": "0.0.0",
   "type": "module",
   "exports": {
