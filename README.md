@@ -2,8 +2,9 @@
 
 ## Applications
 
-- desk
 - note
+- studio
+- playground
 
 ## Libraries
 

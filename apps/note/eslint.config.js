@@ -1,7 +1,5 @@
-// @ts-check
-import namooConfigs from 'eslint-config-namoo';
+import nextConfigs from 'eslint-config-namoo/next';
 
-/**
- * @type {import('eslint-config-namoo').ConfigArray}
- */
-export default [...namooConfigs];
+const eslintConfig = [...nextConfigs];
+
+export default eslintConfig;

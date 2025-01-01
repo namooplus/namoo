@@ -1,51 +1,24 @@
 // @ts-check
 
-import { fixupConfigRules } from "@eslint/compat";
-import { FlatCompat } from "@eslint/eslintrc";
+import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 
-const rc = new FlatCompat();
-
-/** @type {import("@typescript-eslint/utils").TSESLint.FlatConfig.ConfigArray} */
+/**
+ * This config includes:
+ * - Enable recommended importing rules
+ * - Enable recommended import sorting rules
+ *
+ * @type {import("@typescript-eslint/utils").TSESLint.FlatConfig.ConfigArray}
+ */
 export default [
-  ...fixupConfigRules(rc.plugins("import")),
   {
+    plugins: {
+      "simple-import-sort": simpleImportSortPlugin,
+    },
     rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: ["./*", "../*", "!./*.css"],
-              message: "No relative imports",
-            },
-          ],
-        },
-      ],
       "import/first": "error",
       "import/newline-after-import": ["error", { considerComments: true }],
-      "import/no-unresolved": "off",
-      "import/order": [
-        "warn",
-        {
-          groups: [
-            ["builtin", "external"],
-            ["internal"],
-            ["index", "parent", "sibling"],
-          ],
-          pathGroups: [
-            {
-              pattern: "@/**",
-              group: "internal",
-            },
-          ],
-          alphabetize: {
-            order: "asc",
-            caseInsensitive: true,
-          },
-          "newlines-between": "always",
-          warnOnUnassignedImports: true,
-        },
-      ],
+      "simple-import-sort/imports": "warn",
+      "simple-import-sort/exports": "warn",
     },
   },
 ];

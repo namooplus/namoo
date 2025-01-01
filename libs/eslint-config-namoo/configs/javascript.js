@@ -2,5 +2,10 @@
 
 import jsLint from "@eslint/js";
 
-/** @type {import("@typescript-eslint/utils").TSESLint.FlatConfig.ConfigArray} */
+/**
+ * This config includes:
+ * - Enable recommended Javascript rules.
+ *
+ * @type {import("@typescript-eslint/utils").TSESLint.FlatConfig.ConfigArray}
+ */
 export default [jsLint.configs.recommended];
