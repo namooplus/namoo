@@ -6,6 +6,7 @@ import prettierConfigs from "../configs/prettier.js";
 
 /**
  * ESLint configuration for Next.js projects
+ *
  * @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray}
  */
 export default [...javascriptConfigs, ...nextConfigs, ...prettierConfigs];
