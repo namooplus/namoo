@@ -7,7 +7,6 @@
   "author": "namoo.developer@gmail.com",
   "license": "ISC",
   "scripts": {
-    "note": "pnpm --filter @namoo/note",
-    "eslint-config-namoo": "pnpm --filter eslint-config-namoo"
+    "note": "pnpm --filter @namoo/note"
   }
 }
