@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "namoo's note",
 };
 
-export const RootLayout = ({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -33,3 +33,5 @@ export const RootLayout = ({
     </html>
   );
 };
+
+export default RootLayout;
