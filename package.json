@@ -1,21 +1,13 @@
 {
   "name": "namoo",
-  "description": "",
+  "description": "A workspace for namoo's sites",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.15.2",
   "author": "namoo.developer@gmail.com",
   "license": "ISC",
   "scripts": {
-    "desk": "pnpm --filter @namoo/desk",
     "note": "pnpm --filter @namoo/note",
     "eslint-config-namoo": "pnpm --filter eslint-config-namoo"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowAny": [
-        "eslint"
-      ]
-    }
   }
 }
