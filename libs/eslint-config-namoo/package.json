@@ -3,7 +3,12 @@
   "description": "ESLint configuration for workspace",
   "version": "0.0.0",
   "type": "module",
-  "main": "index.js",
+  "exports": {
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "default": "./dist/next.js"
+    }
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.17.0",
